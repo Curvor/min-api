@@ -605,12 +605,12 @@ namespace c74::min {
 
         if (outputmode && mop && outputmode == 1) {    // always output unless output mode is none
             auto           outputs    = static_cast<max::t_object*>(max::object_method((max::t_object*)mop, max::_jit_sym_getoutputlist));
-            max::t_jit_err err        = max::JIT_ERR_NONE;
+//            max::t_jit_err err        = max::JIT_ERR_NONE;
             auto           out_mop_io = static_cast<max::t_object*>(max::object_method(outputs, max::_jit_sym_getindex, 0));
             auto           out_matrix = static_cast<max::t_object*>(max::object_method(out_mop_io, static_cast<max::t_symbol*>(k_sym_getmatrix)));
 
             if (!self || !out_matrix) {
-                err = max::JIT_ERR_INVALID_PTR;
+  //              err = max::JIT_ERR_INVALID_PTR;
             }
             else {
                 auto                   out_savelock = max::object_method(out_matrix, max::_jit_sym_lock, reinterpret_cast<void*>(1));
@@ -621,7 +621,9 @@ namespace c74::min {
                 max::object_method(out_matrix, max::_jit_sym_getdata, &out_bp);
 
                 if (!out_bp)
-                    err = max::JIT_ERR_INVALID_OUTPUT;
+                {
+//                    err = max::JIT_ERR_INVALID_OUTPUT;
+                }
                 else {
                     if (jitob->m_min_object.parallel_breakup_enabled()) {
                         max::jit_parallel_ndim_simplecalc1(reinterpret_cast<max::method>(jit_calculate_ndim_single<min_class_type>), jitob,
