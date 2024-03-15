@@ -66,6 +66,6 @@ namespace c74::max {
     // defined in the mock kernel used for executing object unit tests
 
     extern "C" t_sequence* object_getoutput(void* o, int outletnum);
-    extern "C" t_sequence object_getoutput_and_clear(void* o, int outletnum);
+    extern "C" void object_getoutput_and_clear(void* o, int outletnum, t_sequence* dest);
 
 }    // namespace c74::max
